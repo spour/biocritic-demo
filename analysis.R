@@ -24,11 +24,11 @@ keep.exprs <- filterByExpr(x, group = group)
 x <- x[keep.exprs, , keep.lib.sizes = FALSE]
 x <- calcNormFactors(x, method = "TMM")
 
-design <- model.matrix(~ 0 + group + lane)
+design <- model.matrix(~ 0 + group)
 colnames(design) <- gsub("group", "", colnames(design))
 
 contr.matrix <- makeContrasts(
-  BasalvsLP = Basal - LP,
+  BasalvsLP = LP - Basal,
   BasalvsML = Basal - ML,
   LPvsML = LP - ML,
   levels = colnames(design))
